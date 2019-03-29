@@ -1,0 +1,30 @@
+.386
+
+.model flat, stdcall
+option casemap :none
+include \masm32\include\windows.inc
+include \masm32\include\kernel32.inc
+include \masm32\include\masm32.inc
+include \masm32\include\msvcrt.inc
+include \masm32\macros\macros.asm
+includelib \masm32\lib\kernel32.lib
+includelib \masm32\lib\masm32.lib
+includelib \masm32\lib\msvcrt.lib
+
+.data
+var_1 dd 1
+var_2 dd 2
+
+.code
+start:
+mov eax, var_1
+cmp eax, var_2
+jg bigger
+printf("O maior eh %i\n", var_2)
+jmp saida
+
+bigger:
+    printf("O maior eh %i\n", var_1)
+saida:
+    invoke ExitProcess,0
+end start
